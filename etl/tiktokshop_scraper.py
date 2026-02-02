@@ -11,6 +11,8 @@ from bs4 import BeautifulSoup
 # Global Configuration
 COOKIES_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cookies_raw.json")
 MAX_LOOPS = 5  # As requested in step 4
+SCREENSHOT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "screenshots")
+os.makedirs(SCREENSHOT_DIR, exist_ok=True)
 
 # URLs provided in step 1
 URLS = {
@@ -168,6 +170,7 @@ def scrape_worker(category_name, url):
     all_collected_data = []
     driver.get(url)
     time.sleep(5) # Initial load wait
+    driver.save_screenshot(os.path.join(SCREENSHOT_DIR, f"{category_name}_initial_load.png"))
     
     try:
         # Step 4: Loop 5 times
@@ -212,6 +215,7 @@ def scrape_worker(category_name, url):
                         
                         if click_count % 5 == 0:
                             print(f"[{category_name}] Expanded {click_count} times...")
+                            driver.save_screenshot(os.path.join(SCREENSHOT_DIR, f"{category_name}_expanded_{click_count}.png"))
                     else:
                         # If we don't see "View more", check "No more products" one last time
                         if driver.find_elements(By.XPATH, "//span[contains(text(), 'No more products')]"):
@@ -312,10 +316,10 @@ def scrape_worker(category_name, url):
             
     except Exception as e:
         print(f"[{category_name}] Critical Error: {e}")
-        driver.save_screenshot("error_debug.png")
+        driver.save_screenshot(os.path.join(SCREENSHOT_DIR, f"{category_name}_error.png"))
         
     finally:
-        driver.save_screenshot("final_screen.png")
+        driver.save_screenshot(os.path.join(SCREENSHOT_DIR, f"{category_name}_final.png"))
         fresh_cookies = driver.get_cookies()
         print(f"Captured {len(fresh_cookies)} fresh cookies.")
 
