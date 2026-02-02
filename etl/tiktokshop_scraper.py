@@ -23,9 +23,104 @@ def clean_price(text):
     """Helper to remove non-numeric chars for storage if needed"""
     return text.replace("Rp", "").replace(".", "").strip()
 
+import zipfile
+
+def create_proxy_auth_extension(proxy_url):
+    """
+    Creates a temporary Chrome extension to handle proxy authentication in a folder.
+    format: http://user:password@hostname:port
+    """
+    if not proxy_url or "@" not in proxy_url:
+        return None
+        
+    try:
+        # Parse proxy URL
+        parts = proxy_url.replace("http://", "").replace("https://", "").split("@")
+        auth = parts[0].split(":")
+        server = parts[1].split(":")
+        
+        proxy_host = server[0]
+        proxy_port = server[1]
+        proxy_user = auth[0]
+        proxy_pass = auth[1]
+        
+        manifest_json = """
+        {
+            "version": "1.0.0",
+            "manifest_version": 2,
+            "name": "Chrome Proxy",
+            "permissions": [
+                "proxy",
+                "tabs",
+                "unlimitedStorage",
+                "storage",
+                "<all_urls>",
+                "webRequest",
+                "webRequestBlocking"
+            ],
+            "background": {
+                "scripts": ["background.js"]
+            },
+            "minimum_chrome_version":"22.0.0"
+        }
+        """
+
+        background_js = """
+        var config = {
+                mode: "fixed_servers",
+                rules: {
+                singleProxy: {
+                    scheme: "http",
+                    host: "%s",
+                    port: parseInt(%s)
+                },
+                bypassList: ["localhost"]
+                }
+            };
+
+        chrome.proxy.settings.set({value: config, scope: "regular"}, function() {});
+
+        chrome.webRequest.onAuthRequired.addListener(
+            function(details) {
+                return {
+                    authCredentials: {
+                        username: "%s",
+                        password: "%s"
+                    }
+                };
+            },
+            {urls: ["<all_urls>"]},
+            ["blocking"]
+        );
+        """ % (proxy_host, proxy_port, proxy_user, proxy_pass)
+        
+        ext_dir = os.path.join(os.path.dirname(__file__), "proxy_auth_extension")
+        os.makedirs(ext_dir, exist_ok=True)
+        
+        with open(os.path.join(ext_dir, "manifest.json"), "w") as f:
+            f.write(manifest_json)
+        with open(os.path.join(ext_dir, "background.js"), "w") as f:
+            f.write(background_js)
+        
+        return ext_dir
+    except Exception as e:
+        print(f"Failed to create proxy extension: {e}")
+        return None
+
 def setup_driver():
     options = uc.ChromeOptions()
     
+    # 0. Proxy Configuration
+    proxy_url = os.getenv("PROXY_URL")
+    if proxy_url:
+        print(f"Configuring residential proxy...")
+        ext_dir = create_proxy_auth_extension(proxy_url)
+        if ext_dir:
+            options.add_argument(f'--load-extension={os.path.abspath(ext_dir)}')
+        else:
+            # Fallback to no-auth proxy if parts missing
+            options.add_argument(f'--proxy-server={proxy_url}')
+
     # Check for linux version to help uc match driver
     version_main = None
     if os.name != 'nt': # Linux/GHA
