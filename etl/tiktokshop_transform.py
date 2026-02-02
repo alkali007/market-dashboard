@@ -37,7 +37,7 @@ def transform_item(item):
 
     # 5. Clean Sold Quantity (Handles "2.2M", "10K", etc)
     sold = str(item.get('sold_quantity', '0')).lower()
-    sold = sold.replace('sold', '').replace('terjual',').replace('+', '').replace(' ','').strip()
+    sold = sold.replace('sold', '').replace('terjual', '').replace('+', '').replace(' ', '').strip()
     
     sold_val = 0
     if 'm' in sold:

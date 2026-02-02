@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 
 # Global Configuration
-COOKIES_FILE = "cookies_raw.json"
+COOKIES_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cookies_raw.json")
 MAX_LOOPS = 5  # As requested in step 4
 
 # URLs provided in step 1
