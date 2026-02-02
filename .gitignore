@@ -1,0 +1,54 @@
+# --- Environment & Sensitive ---
+.env
+.env.local
+.env.*.local
+*.json
+!cookies_raw.json 
+!package.json
+!tsconfig.json
+!next.config.js
+!next.config.ts
+!postcss.config.mjs
+!eslint.config.mjs
+
+# --- Python & ETL ---
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.pytest_cache/
+data/raw/
+data/*.csv
+!data/beauty_data_cleaned.csv
+
+# --- Node / Frontend (AGGRESSIVE) ---
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+frontend/out/
+build/
+frontend/build/
+.turbo/
+.vercel
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Go / Backend ---
+backend/bin/
+backend/market_dashboard
+backend/vendor/
+
+# --- Artifacts & OS ---
+error_debug.png
+final_screen.png
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.bak
