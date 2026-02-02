@@ -44,14 +44,15 @@ def setup_driver():
     # 2. Force a standard Desktop Resolution
     options.add_argument("--window-size=1366,768")
     
-    # 3. Force a Real User-Agent
-    options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36")
+    # 3. Force a Real User-Agent (Matching your manual payload)
+    options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36")
     
-    # 4. Standard bypasses
+    # 4. Standard bypasses & Stealth
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-popup-blocking")
-    options.add_argument("--disable-gpu")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("--disable-infobars")
+    options.add_argument("--lang=en-US,en;q=0.9")
     
     # Initialize with detected version if on linux
     if version_main:
@@ -61,6 +62,10 @@ def setup_driver():
         driver = uc.Chrome(options=options)
     
     # 5. EXTRA SAFETY
+    driver.execute_cdp_cmd('Network.setUserAgentOverride', {
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+        "platform": "Windows"
+    })
     driver.set_window_size(1366, 768)
 
     return driver
@@ -89,7 +94,10 @@ def inject_cookies(driver):
             if not filtered:
                 continue
                 
-            driver.get(f"https://{domain_root.lstrip('.')}/404")
+            # Load the domain context (without 404 to avoid bot flags)
+            driver.get(f"https://{domain_root.lstrip('.')}/")
+            time.sleep(2)
+            
             for c in filtered:
                 try:
                     # Clean cookie dict for Selenium compatibility
@@ -113,8 +121,8 @@ def inject_cookies(driver):
                         new_cookie['sameSite'] = ss.capitalize()
 
                     driver.add_cookie(new_cookie)
-                except Exception as ce:
-                    pass # Skip invalid individual cookies
+                except Exception:
+                    pass
             
     except Exception as e:
         print(f"Cookie injection warning: {e}")
