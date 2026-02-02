@@ -147,7 +147,16 @@ def setup_driver():
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_argument("--disable-infobars")
-    options.add_argument("--lang=id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7")
+    options.add_argument("--lang=en-US,en;q=0.9")
+    
+    # 5. WebRTC IP Leak Prevention - CRITICAL for proxy
+    options.add_argument("--disable-webrtc")
+    options.add_argument("--enforce-webrtc-ip-permission-check")
+    options.add_argument("--webrtc-ip-handling-policy=disable_non_proxied_udp")
+    
+    # 6. Exclude automation flags
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option("useAutomationExtension", False)
     
     # Initialize with detected version if on linux
     if version_main:
@@ -179,13 +188,46 @@ def setup_driver():
         }
     })
     
-    # 6. Override navigator properties to hide automation
+    # 7. Override navigator properties to hide automation + Canvas/WebGL spoof
     driver.execute_script("""
+        // Hide webdriver
         Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+        
+        // Standard properties
         Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']});
         Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3, 4, 5]});
         Object.defineProperty(navigator, 'hardwareConcurrency', {get: () => 4});
         Object.defineProperty(navigator, 'deviceMemory', {get: () => 8});
+        
+        // Permissions - block geolocation prompt
+        const originalQuery = window.navigator.permissions.query;
+        window.navigator.permissions.query = (parameters) => (
+            parameters.name === 'notifications' || parameters.name === 'geolocation' ?
+            Promise.resolve({state: Notification.permission}) :
+            originalQuery(parameters)
+        );
+        
+        // WebGL Vendor/Renderer Spoof (Real GPU strings)
+        const getParameter = WebGLRenderingContext.prototype.getParameter;
+        WebGLRenderingContext.prototype.getParameter = function(parameter) {
+            if (parameter === 37445) { return 'Google Inc. (NVIDIA)'; }
+            if (parameter === 37446) { return 'ANGLE (NVIDIA, NVIDIA GeForce GTX 1650 Direct3D11 vs_5_0 ps_5_0, D3D11)'; }
+            return getParameter.call(this, parameter);
+        };
+        
+        // Canvas fingerprint randomizer (adds noise per session)
+        const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+        HTMLCanvasElement.prototype.toDataURL = function(type) {
+            if (type === 'image/png' && this.width > 16 && this.height > 16) {
+                const ctx = this.getContext('2d');
+                const imageData = ctx.getImageData(0, 0, this.width, this.height);
+                for (let i = 0; i < imageData.data.length; i += 4) {
+                    imageData.data[i] = imageData.data[i] ^ (Math.random() * 0.01);
+                }
+                ctx.putImageData(imageData, 0, 0);
+            }
+            return originalToDataURL.apply(this, arguments);
+        };
     """)
     
     driver.set_window_size(1366, 768)
