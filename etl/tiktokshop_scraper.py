@@ -66,32 +66,55 @@ def setup_driver():
     return driver
 
 def inject_cookies(driver):
-    """Injects cookies handling the domain split logic"""
+    """
+    Injects cookies from COOKIES_FILE.
+    Supports standard and EditThisCookie formats.
+    """
+    if not os.path.exists(COOKIES_FILE):
+        print(f"No {COOKIES_FILE} found, skipping cookie injection.")
+        return
+
     try:
         with open(COOKIES_FILE, "r") as file:
             data = json.load(file)
             
         all_cookies = data['cookies'] if (isinstance(data, dict) and 'cookies' in data) else data
         
-        # 1. Global Session
-        driver.get("https://www.tokopedia.com/404")
-        for c in [x for x in all_cookies if ".tokopedia.com" in x.get('domain', '')]:
-            try:
-                driver.add_cookie({
-                    'name': c['name'], 'value': c['value'], 'domain': c['domain'],
-                    'path': c['path'], 'expiry': int(c.get('expirationDate', c.get('expires', 0)))
-                })
-            except: pass
+        # Domains to set context for
+        domains = [".tokopedia.com", "shop-id.tokopedia.com"]
+        
+        for domain_root in domains:
+            # Filter cookies for this specific domain
+            filtered = [c for c in all_cookies if domain_root in c.get('domain', '')]
+            if not filtered:
+                continue
+                
+            driver.get(f"https://{domain_root.lstrip('.')}/404")
+            for c in filtered:
+                try:
+                    # Clean cookie dict for Selenium compatibility
+                    new_cookie = {
+                        'name': c['name'],
+                        'value': c['value'],
+                        'domain': c.get('domain'),
+                        'path': c.get('path', '/'),
+                        'secure': c.get('secure', False),
+                        'httpOnly': c.get('httpOnly', False)
+                    }
+                    
+                    # Handle expiry (EditThisCookie uses expirationDate)
+                    expiration = c.get('expirationDate', c.get('expiry', c.get('expires')))
+                    if expiration:
+                        new_cookie['expiry'] = int(float(expiration))
+                    
+                    # Handle sameSite casing (strict -> Strict)
+                    ss = c.get('sameSite', '').lower()
+                    if ss in ['strict', 'lax', 'none']:
+                        new_cookie['sameSite'] = ss.capitalize()
 
-        # 2. Shop Session
-        driver.get("https://shop-id.tokopedia.com/404")
-        for c in [x for x in all_cookies if "shop-id.tokopedia.com" in x.get('domain', '')]:
-            try:
-                driver.add_cookie({
-                    'name': c['name'], 'value': c['value'], 'domain': c['domain'],
-                    'path': c['path'], 'expiry': int(c.get('expirationDate', c.get('expires', 0)))
-                })
-            except: pass
+                    driver.add_cookie(new_cookie)
+                except Exception as ce:
+                    pass # Skip invalid individual cookies
             
     except Exception as e:
         print(f"Cookie injection warning: {e}")
