@@ -57,9 +57,14 @@ export default function Home() {
   const fetchInitialData = async () => {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081';
+      const apiKey = process.env.NEXT_PUBLIC_API_KEY || '';
       const [bRes, tRes] = await Promise.all([
-        fetch(`${apiUrl}/dashboard/distribution?type=brand&limit=200`),
-        fetch(`${apiUrl}/dashboard/distribution?type=category&limit=100`)
+        fetch(`${apiUrl}/dashboard/distribution?type=brand&limit=200`, {
+          headers: { 'X-API-Key': apiKey }
+        }),
+        fetch(`${apiUrl}/dashboard/distribution?type=category&limit=100`, {
+          headers: { 'X-API-Key': apiKey }
+        })
       ]);
       const brands = await bRes.json();
       const types = await tRes.json();
@@ -85,13 +90,17 @@ export default function Home() {
       const qs = queryParams.toString();
 
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081';
+      const apiKey = process.env.NEXT_PUBLIC_API_KEY || '';
+
+      const headers = { 'X-API-Key': apiKey };
+
       const [kpi, ps, dist, bp, tp, hm] = await Promise.all([
-        fetch(`${apiUrl}/dashboard/kpi?${qs}`).then(r => r.json()),
-        fetch(`${apiUrl}/dashboard/scatter?type=price_quantity&${qs}`).then(r => r.json()),
-        fetch(`${apiUrl}/dashboard/distribution?type=brand&${qs}`).then(r => r.json()),
-        fetch(`${apiUrl}/dashboard/brand?${qs}`).then(r => r.json()),
-        fetch(`${apiUrl}/dashboard/product-type?${qs}`).then(r => r.json()),
-        fetch(`${apiUrl}/dashboard/heatmap?${qs}`).then(r => r.json())
+        fetch(`${apiUrl}/dashboard/kpi?${qs}`, { headers }).then(r => r.json()),
+        fetch(`${apiUrl}/dashboard/scatter?type=price_quantity&${qs}`, { headers }).then(r => r.json()),
+        fetch(`${apiUrl}/dashboard/distribution?type=brand&${qs}`, { headers }).then(r => r.json()),
+        fetch(`${apiUrl}/dashboard/brand?${qs}`, { headers }).then(r => r.json()),
+        fetch(`${apiUrl}/dashboard/product-type?${qs}`, { headers }).then(r => r.json()),
+        fetch(`${apiUrl}/dashboard/heatmap?${qs}`, { headers }).then(r => r.json())
       ]);
 
 
