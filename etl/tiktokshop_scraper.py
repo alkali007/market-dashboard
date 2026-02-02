@@ -9,8 +9,11 @@ from bs4 import BeautifulSoup
 
 # Global Configuration
 MAX_LOOPS = 5
-SCREENSHOT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "screenshots")
+PROJECT_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+SCREENSHOT_DIR = os.path.join(PROJECT_ROOT, "data", "screenshots")
+COOKIES_PATH = os.path.join(PROJECT_ROOT, "data", "cookies.json")
 os.makedirs(SCREENSHOT_DIR, exist_ok=True)
+os.makedirs(os.path.join(PROJECT_ROOT, "data"), exist_ok=True)
 
 # URLs provided in step 1
 URLS = {
@@ -112,6 +115,16 @@ async def scrape_worker(category_name, url, proxy_config=None):
         # Apply Stealth
         page = await context.new_page()
         await Stealth().apply_stealth_async(page)
+
+        # Load existing cookies if any
+        if os.path.exists(COOKIES_PATH):
+            try:
+                with open(COOKIES_PATH, 'r') as f:
+                    cookies = json.load(f)
+                    await context.add_cookies(cookies)
+                print(f"[{category_name}] Cookies loaded successfully.")
+            except Exception as e:
+                print(f"[{category_name}] Failed to load cookies: {e}")
         
         # Additional CDP Metadata (Client Hints)
         client = await page.context.new_cdp_session(page)
@@ -151,7 +164,7 @@ async def scrape_worker(category_name, url, proxy_config=None):
                 print(f"[{category_name}] Iteration {loop_index}/{MAX_LOOPS}...")
 
                 if loop_index > 1:
-                    await page.reload(wait_until="networkidle")
+                    await page.reload(wait_until="networkidle", timeout=60000)
                     await asyncio.sleep(random.uniform(5, 8))
                 
                 click_count = 0
@@ -255,11 +268,23 @@ async def scrape_worker(category_name, url, proxy_config=None):
         except Exception as e:
             print(f"[{category_name}] Critical Error: {e}")
             await page.screenshot(path=os.path.join(SCREENSHOT_DIR, f"{category_name}_error.png"))
-            raise e # Propagate error
+            # We don't raise here if we want to continue other categories in main()
+            return False
             
         finally:
             await page.screenshot(path=os.path.join(SCREENSHOT_DIR, f"{category_name}_final.png"))
+            
+            # Save cookies before closing
+            try:
+                cookies = await context.cookies()
+                with open(COOKIES_PATH, 'w') as f:
+                    json.dump(cookies, f)
+                print(f"[{category_name}] Cookies saved successfully.")
+            except Exception as e:
+                print(f"[{category_name}] Failed to save cookies: {e}")
+                
             await browser.close()
+            return True
 
 async def main():
     # Proxy Setup
@@ -279,9 +304,15 @@ async def main():
         except Exception as e:
             print(f"Failed to parse Proxy URL: {e}")
 
+    success_found = False
     for category, link in URLS.items():
         print(f"Starting Playwright scrape for: {category}")
-        await scrape_worker(category, link, proxy_config)
+        success = await scrape_worker(category, link, proxy_config)
+        if success:
+            success_found = True
+    
+    if not success_found:
+        raise Exception("All scraping attempts failed. No data extracted.")
 
 if __name__ == "__main__":
     start_time = time.time()

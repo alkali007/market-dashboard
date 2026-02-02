@@ -29,8 +29,13 @@ def main():
     try:
         asyncio.run(run_extract())
     except Exception as e:
-        print(f"EXTRACT Phase Failed: {e}")
-        return
+        print(f"EXTRACT Phase encountered an error: {e}")
+        # Check if we at least got some data
+        raw_files = [f for f in os.listdir(raw_dir) if f.endswith("_raw.json")]
+        if not raw_files:
+            print("No raw data extracted. Stopping pipeline.")
+            return
+        print(f"Extraction had issues, but {len(raw_files)} raw files found. Continuing...")
 
     # 1.5. CLOUD BACKUP (Optional Phase)
     print("\n[PHASE 1.5] BACKUP: Uploading Raw Data to R2...")

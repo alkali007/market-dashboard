@@ -2,6 +2,10 @@ import os
 import boto3
 from botocore.config import Config
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
 
 def get_r2_client():
     """
