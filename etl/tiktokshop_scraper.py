@@ -119,6 +119,7 @@ def setup_driver():
         else:
             # Fallback to no-auth proxy if parts missing
             options.add_argument(f'--proxy-server={proxy_url}')
+            print("No Proxy Found")
 
     # Check for linux version to help uc match driver
     version_main = None
