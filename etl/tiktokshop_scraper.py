@@ -4,7 +4,7 @@ import time
 import random
 import asyncio
 from playwright.async_api import async_playwright
-from playwright_stealth import stealth_async
+from playwright_stealth import Stealth
 from bs4 import BeautifulSoup
 
 # Global Configuration
@@ -111,7 +111,7 @@ async def scrape_worker(category_name, url, proxy_config=None):
         
         # Apply Stealth
         page = await context.new_page()
-        await stealth_async(page)
+        await Stealth().apply_stealth_async(page)
         
         # Additional CDP Metadata (Client Hints)
         client = await page.context.new_cdp_session(page)
@@ -166,7 +166,7 @@ async def scrape_worker(category_name, url, proxy_config=None):
                             break
 
                         # Find "View more" button
-                        view_more_button = await page.get_by_role("button", name="View more").first
+                        view_more_button = page.get_by_role("button", name="View more").first
                         if await view_more_button.is_visible():
                             await view_more_button.scroll_into_view_if_needed()
                             await asyncio.sleep(random.uniform(0.5, 1.5))
