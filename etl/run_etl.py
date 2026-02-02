@@ -14,6 +14,15 @@ def main():
     print("STARTING TIKTOK SHOP ETL PROCESS")
     print("==========================================")
 
+    # 0. PRE-CLEANUP (Avoid Ghost Data)
+    project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+    raw_dir = os.path.join(project_root, "data", "raw")
+    if os.path.exists(raw_dir):
+        import shutil
+        print(f"Cleaning old raw data in {raw_dir}...")
+        for f in os.listdir(raw_dir):
+            os.remove(os.path.join(raw_dir, f))
+
     # 1. EXTRACT
     print("\n[PHASE 1] EXTRACT: Running Scraper...")
     try:

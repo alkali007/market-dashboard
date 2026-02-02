@@ -70,9 +70,8 @@ def run_transform():
     out_dir = os.path.join(project_root, "data")
     os.makedirs(out_dir, exist_ok=True)
 
-    if not os.path.exists(raw_dir):
-        print(f"No raw data found in {raw_dir}")
-        return
+    if not os.path.exists(raw_dir) or not os.listdir(raw_dir):
+        raise FileNotFoundError(f"No raw data files found in {raw_dir}")
 
     for filename in os.listdir(raw_dir):
         if filename.endswith("_raw.json"):

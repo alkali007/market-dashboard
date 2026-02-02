@@ -138,12 +138,12 @@ async def scrape_worker(category_name, url, proxy_config=None):
         })
 
         try:
-            # Neutral navigation
-            await page.goto("https://shop-id.tokopedia.com/", wait_until="networkidle")
+            # Neutral navigation - Using domcontentloaded to be faster/more resilient
+            await page.goto("https://shop-id.tokopedia.com/", wait_until="domcontentloaded", timeout=60000)
             await asyncio.sleep(random.uniform(2, 4))
             
             # Navigate to target
-            await page.goto(url, wait_until="networkidle")
+            await page.goto(url, wait_until="networkidle", timeout=60000)
             await asyncio.sleep(random.uniform(5, 8))
             await page.screenshot(path=os.path.join(SCREENSHOT_DIR, f"{category_name}_initial_load.png"))
             
@@ -255,6 +255,7 @@ async def scrape_worker(category_name, url, proxy_config=None):
         except Exception as e:
             print(f"[{category_name}] Critical Error: {e}")
             await page.screenshot(path=os.path.join(SCREENSHOT_DIR, f"{category_name}_error.png"))
+            raise e # Propagate error
             
         finally:
             await page.screenshot(path=os.path.join(SCREENSHOT_DIR, f"{category_name}_final.png"))
