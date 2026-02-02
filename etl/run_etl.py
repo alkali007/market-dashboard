@@ -4,6 +4,7 @@ import asyncio
 from tiktokshop_scraper import main as run_extract
 from tiktokshop_transform import run_transform
 from tiktokshop_load import run_load
+from r2_utils import upload_raw_to_r2
 
 def main():
     """
@@ -30,6 +31,18 @@ def main():
     except Exception as e:
         print(f"EXTRACT Phase Failed: {e}")
         return
+
+    # 1.5. CLOUD BACKUP (Optional Phase)
+    print("\n[PHASE 1.5] BACKUP: Uploading Raw Data to R2...")
+    try:
+        raw_files = [f for f in os.listdir(raw_dir) if f.endswith("_raw.json")]
+        for filename in raw_files:
+            category = filename.replace("_raw.json", "")
+            file_path = os.path.join(raw_dir, filename)
+            upload_raw_to_r2(category, file_path)
+    except Exception as e:
+        print(f"BACKUP Phase skipped or encountered error: {e}")
+        # We don't return here because backup is auxiliary, not critical for the next steps
 
     # 2. TRANSFORM
     print("\n[PHASE 2] TRANSFORM: Cleaning and Processing Data...")
