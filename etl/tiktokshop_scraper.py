@@ -156,11 +156,38 @@ def setup_driver():
     else:
         driver = uc.Chrome(options=options)
     
-    # 5. EXTRA SAFETY
+    # 5. Inject Client Hints to match real browser headers
     driver.execute_cdp_cmd('Network.setUserAgentOverride', {
         "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
-        "platform": "Windows"
+        "platform": "Windows",
+        "userAgentMetadata": {
+            "brands": [
+                {"brand": "Not(A:Brand", "version": "8"},
+                {"brand": "Chromium", "version": "144"},
+                {"brand": "Google Chrome", "version": "144"}
+            ],
+            "fullVersionList": [
+                {"brand": "Not(A:Brand", "version": "8.0.0.0"},
+                {"brand": "Chromium", "version": "144.0.0.0"},
+                {"brand": "Google Chrome", "version": "144.0.0.0"}
+            ],
+            "platform": "Windows",
+            "platformVersion": "10.0.0",
+            "architecture": "x86",
+            "model": "",
+            "mobile": False
+        }
     })
+    
+    # 6. Override navigator properties to hide automation
+    driver.execute_script("""
+        Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+        Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']});
+        Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3, 4, 5]});
+        Object.defineProperty(navigator, 'hardwareConcurrency', {get: () => 4});
+        Object.defineProperty(navigator, 'deviceMemory', {get: () => 8});
+    """)
+    
     driver.set_window_size(1366, 768)
 
     return driver
