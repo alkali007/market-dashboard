@@ -1,5 +1,6 @@
 import os
 import time
+import asyncio
 from tiktokshop_scraper import main as run_extract
 from tiktokshop_transform import run_transform
 from tiktokshop_load import run_load
@@ -16,7 +17,7 @@ def main():
     # 1. EXTRACT
     print("\n[PHASE 1] EXTRACT: Running Scraper...")
     try:
-        run_extract()
+        asyncio.run(run_extract())
     except Exception as e:
         print(f"EXTRACT Phase Failed: {e}")
         return

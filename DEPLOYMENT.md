@@ -9,24 +9,19 @@ This document provides instructions for deploying the **Personal Care Analytical
 
 ---
 
-## 2. Backend Deployment (Koyeb)
+## 2. Backend Deployment (Railway.com)
 The backend is a Go application located in `/backend`.
 
 ### Steps:
-1. **Create Account**: [Koyeb.com](https://www.koyeb.com).
-2. **New Service**: Select **GitHub** source.
+1. **Create Account**: [Railway.app](https://railway.app).
+2. **New Project**: Select **Deploy from GitHub repo**.
 3. **Configuration**:
-   - **Work Directory**: `backend`
-   - **Build Command**: `go build -o market_dashboard ./cmd/server`
-   - **Run Command**: `./market_dashboard`
-4. **Environment Variables**: Use the "Transaction Connection" or "Connection Parameters" from Supabase:
-   - `DATABASE_URL`: Your Supabase connection string
-   - `DB_HOST`: Supabase Host (e.g., `db.your-id.supabase.co`)
-   - `DB_PORT`: `5432` or `6543`
-   - `DB_USER`: `postgres`
-   - `DB_PASSWORD`: Your project password
-   - `DB_NAME`: `postgres`
-   - `PORT`: `8000`
+   - Railway will automatically detect the Go project.
+   - Go to **Settings > General > Root Directory** and set it to `backend`.
+4. **Environment Variables**:
+   - `DATABASE_URL`: Your Supabase connection string.
+   - `PORT`: (Optional) Railway provides this automatically, but you can set it to `8080`.
+5. **Custom Domain**: In the **Settings** tab, generate a domain or add your own.
 
 ---
 
@@ -38,7 +33,7 @@ The frontend is a Next.js application in `/frontend`.
 2. **Settings**:
    - **Root Directory**: `frontend`
 3. **Environment Variables**:
-   - `NEXT_PUBLIC_API_URL`: Your deployed Koyeb API URL.
+   - `NEXT_PUBLIC_API_URL`: Your deployed Railway API URL (e.g., `https://backend-production-xyz.up.railway.app`).
 
 ---
 
