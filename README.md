@@ -1,68 +1,88 @@
-# Personal Care Analytical Console
-### Market Intelligence Dashboard for TikTok Shop
+# TikTok Shop Market Intelligence Platform
+*From Raw Data to Strategic Insight: A Story of Resilient Engineering*
 
-A full-stack market intelligence platform that scrapes, processes, and visualizes TikTok Shop data for the Personal Care industry.
+---
 
-## 🏗️ Architecture Overview
+## 🌟 The Narrative
+In the fast-paced world of E-commerce, data is often scattered, volatile, and protected by sophisticated bot defenses. This project is a production-grade market intelligence solution that transforms raw TikTok Shop data into a secure, high-fidelity analytical console.
 
-The project is built with a modular **ETL-First** philosophy:
+---
 
-### 1. 📥 Data Extraction (The Scraper)
-- **Tech**: Python, Undetected Chromedriver, BeautifulSoup4.
-- **Workflow**: Automated navigation to TikTok Shop categories, infinite scroll handling, and raw data extraction in JSON format.
-- **Location**: `etl/tiktokshop_scraper.py`
+## 🏗 Full-Stack Architecture
+The system is built as a series of specialized layers, each solving a specific engineering or security challenge.
 
-### 2. 🧹 Data Transformation (The Processor)
-- **Tech**: Python, Pandas.
-- **Workflow**: Cleans raw strings into structured numerical data (prices, sales volumes, ratings), handles currency conversion, and calculates discounts.
-- **Location**: `etl/tiktokshop_transform.py`
+```mermaid
+graph TD
+    subgraph "Phase 1: The Data Engine (GitHub Actions)"
+        GA[Cron Trigger] --> S[Playwright Scraper]
+        S -- "Extract & Stealth" --> R(Raw JSON)
+        R -- "Cloud Backup" --> R2[Cloudflare R2]
+        R -- "Transform" --> T[Pandas/Regex]
+        T -- "Upsert" --> DB[(Supabase DB)]
+    end
 
-### 3. 🚀 Data Loading (The Pipeline)
-- **Tech**: Python, Psycopg2.
-- **Workflow**: Performs advanced enrichment (fuzz matching for brands/models) and upserts data into **Supabase (PostgreSQL)**.
-- **Location**: `etl/tiktokshop_load.py` & `pipeline/`
+    subgraph "Phase 2: The Security Gateway (Vercel/Railway)"
+        DB -- "Stream" --> API[Go Backend]
+        API -- "Secured" --> PX["Server-Side Proxy"]
+        PX -- "Sanitized Data" --> UI[Next.js UI]
+    end
 
-### 4. 🔗 Backend API
-- **Tech**: Go (Gin Gonic).
-- **Workflow**: High-performance REST API serving aggregated market metrics from Supabase.
-- **Location**: `backend/`
+    subgraph "Phase 3: The Intelligence Console"
+        UI -- "Filters" --> HM[Market Heatmap]
+        UI -- "Analysis" --> BP[Brand Performance]
+    end
+```
 
-### 5. 📊 Frontend Console
-- **Tech**: Next.js 15, Recharts, Tailwind CSS.
-- **Workflow**: Premium analytical dashboard featuring market heatmaps and interactive filters.
-- **Location**: `frontend/`
+---
+
+## ⚙️ The ETL Engine (Data Engineering)
+*   **Intelligent Extraction**: Using **Playwright (Python)** with Stealth configurations, the scraper mimics human patterns to navigate Tokopedia’s Personal Care section.
+*   **Decoupled Backup**: Every scrape is mirrored to **Cloudflare R2**, ensuring a permanent "source of truth" beyond the database.
+*   **Normalization & Deduplication**: URLs are cleaned of tracking tokens before hashing (SHA-256), ensuring price updates are tracked without duplicate records.
+*   **Fail-Fast Resilience**: Strict error propagation ensures that if a proxy fails, the system halts immediately to prevent data corruption.
+
+## 🛡 Security & DevOps
+*   **Zero-Trust Frontend**: A **Server-Side Proxy** in Next.js moves API authentication to the server, hiding secrets from the browser's Network tab.
+*   **Database Governance**: **Row Level Security (RLS)** in PostgreSQL restricts data access solely to the API's service role.
+*   **Automated ROI**: Optimized GitHub Actions with failure-only artifact uploads and 24h retention to minimize storage overhead.
+
+## 📊 The Analytical Console
+*   **KPI Command Center**: Instant visibility into Total Volume, Pricing Trends, and Discounts.
+*   **Market Share Distribution**: Visualizing brand dominance and niche concentration.
+*   **Strategic Pricing Heatmap**: Identifying the "Sweet Spot" where price meets peak consumer satisfaction.
+
+---
+
+## 🛠 Tech Stack
+- **Backend**: Go (Chi), PostgreSQL (Supabase)
+- **ETL**: Python, Playwright, Pandas, Boto3 (R2)
+- **Frontend**: Next.js 14, TypeScript, Tailwind CSS, Recharts
+- **DevOps**: GitHub Actions, Railway, Vercel
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Python 3.10+
-- Go 1.22+
-- Node.js 18+
-- Supabase Project
+- Python 3.10+, Go 1.22+, Node.js 18+
+- Supabase Project & Cloudflare R2 Bucket
 
-### Installation
-1. **Clone the Repo**:
-   ```bash
-   git clone <your-repo-url>
-   ```
-2. **Setup ETL**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Setup Backend**:
-   ```bash
-   cd backend && go mod download
-   ```
-4. **Setup Frontend**:
-   ```bash
-   cd frontend && npm install
-   ```
+### Quick Start
+1. **Setup Env**: Copy `.env.example` to `.env` and fill in your credentials.
+2. **Setup ETL**: `pip install -r requirements.txt`
+3. **Setup Services**:
+   - Backend: `cd backend && go mod download`
+   - Frontend: `cd frontend && npm install`
 
 ### Running Locally
-1. Configure your `.env` file at the root with your **Supabase** credentials.
-2. Run the ETL: `python etl/run_etl.py`
-3. Start Backend: `cd backend && go run ./cmd/server`
-4. Start Frontend: `cd frontend && npm run dev`
+- **Run ETL**: `python etl/run_etl.py`
+- **Start Backend**: `cd backend && go run ./cmd/server`
+- **Start Frontend**: `cd frontend && npm run dev`
+
+---
 
 ## 🌐 Deployment
-Refer to [DEPLOYMENT.md](./DEPLOYMENT.md) for full instructions on deploying to **Koyeb (Backend)**, **Vercel (Frontend)**, and **GitHub Actions (ETL)**.
+Full instructions available in [DEPLOYMENT.md](./DEPLOYMENT.md). 
+- **Backend**: Railway.app
+- **Frontend**: Vercel
+- **ETL**: GitHub Actions (Schedule: Hourly)
