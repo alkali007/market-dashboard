@@ -36,10 +36,10 @@ jobs:
         run: |
           xvfb-run --server-args="-screen 0 1366x768x24" python etl/run_etl.py
 
-      - name: Upload Screenshots
+      - name: Upload Screenshots (On Failure)
         uses: actions/upload-artifact@v4
-        if: always()
+        if: failure() # Only upload if the scraper crashes/fails
         with:
           name: scraper-screenshots
           path: data/screenshots/
-          retention-days: 7
+          retention-days: 1 # GitHub minimum is 1 day
