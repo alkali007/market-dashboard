@@ -154,10 +154,8 @@ def setup_driver():
     options.add_argument("--enforce-webrtc-ip-permission-check")
     options.add_argument("--webrtc-ip-handling-policy=disable_non_proxied_udp")
     
-    # 6. Exclude automation flags
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    options.add_experimental_option("useAutomationExtension", False)
-    
+    # Note: undetected-chromedriver already handles excludeSwitches internally
+
     # Initialize with detected version if on linux
     if version_main:
         print(f"Detected Chrome version: {version_main}")
