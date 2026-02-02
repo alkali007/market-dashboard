@@ -266,15 +266,12 @@ async def scrape_worker(category_name, url, proxy_config=None):
                 save_raw_data(category_name, iteration_products)
 
         except Exception as e:
-            print(f"[{category_name}] Critical Error: {e}")
-            await page.screenshot(path=os.path.join(SCREENSHOT_DIR, f"{category_name}_error.png"))
-            # We don't raise here if we want to continue other categories in main()
+            print(f"[{category_name}] Attempt Failed: {e}")
+            await page.screenshot(path=os.path.join(SCREENSHOT_DIR, f"{category_name}_attempt_error.png"))
             return False
             
         finally:
-            await page.screenshot(path=os.path.join(SCREENSHOT_DIR, f"{category_name}_final.png"))
-            
-            # Save cookies before closing
+            # Save cookies regardless of partial success to capture session state
             try:
                 cookies = await context.cookies()
                 with open(COOKIES_PATH, 'w') as f:
@@ -283,6 +280,7 @@ async def scrape_worker(category_name, url, proxy_config=None):
             except Exception as e:
                 print(f"[{category_name}] Failed to save cookies: {e}")
                 
+            await page.screenshot(path=os.path.join(SCREENSHOT_DIR, f"{category_name}_final.png"))
             await browser.close()
             return True
 
@@ -306,13 +304,30 @@ async def main():
 
     success_found = False
     for category, link in URLS.items():
-        print(f"Starting Playwright scrape for: {category}")
-        success = await scrape_worker(category, link, proxy_config)
-        if success:
+        print(f"--- Processing Category: {category} ---")
+        
+        category_success = False
+        
+        # Try 1: Cookies + Direct (No Proxy)
+        if os.path.exists(COOKIES_PATH):
+            print(f"[{category}] Step 1: Attempting with existing cookies (Direct)...")
+            category_success = await scrape_worker(category, link, proxy_config=None)
+        else:
+            print(f"[{category}] Step 1: No cookies found. Skipping direct attempt.")
+
+        # Try 2: Proxy Fallback (If Direct failed or no cookies)
+        if not category_success:
+            if proxy_config:
+                print(f"[{category}] Step 2: Falling back to RESIDENTIAL PROXY...")
+                category_success = await scrape_worker(category, link, proxy_config=proxy_config)
+            else:
+                print(f"[{category}] Step 2 Skip: No proxy configured and direct failed.")
+
+        if category_success:
             success_found = True
     
     if not success_found:
-        raise Exception("All scraping attempts failed. No data extracted.")
+        raise Exception("All scraping strategies (Direct & Proxy) failed for all categories.")
 
 if __name__ == "__main__":
     start_time = time.time()
