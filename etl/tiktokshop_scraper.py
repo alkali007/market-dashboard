@@ -24,24 +24,41 @@ def clean_price(text):
 def setup_driver():
     options = uc.ChromeOptions()
     
-    # 1. Use the "New" Headless mode (Behaves more like a real browser)
+    # Check for linux version to help uc match driver
+    version_main = None
+    if os.name != 'nt': # Linux/GHA
+        try:
+            import subprocess
+            res = subprocess.run(['google-chrome', '--version'], capture_output=True, text=True)
+            version_str = res.stdout.strip()
+            # "Google Chrome 114.0.5735.90" -> 114
+            version_main = int(version_str.split(' ')[2].split('.')[0])
+        except:
+            pass
+
+    # 1. Use the "New" Headless mode
     options.add_argument("--headless=new") 
     
     # 2. Force a standard Desktop Resolution
     options.add_argument("--window-size=1366,768")
     
-    # 3. Force a Real User-Agent (Remove "Headless" from the string)
+    # 3. Force a Real User-Agent
     options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36")
     
     # 4. Standard bypasses
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-popup-blocking")
+    options.add_argument("--disable-gpu")
     
-    # Initialize
-    driver = uc.Chrome(options=options)
+    # Initialize with detected version if on linux
+    if version_main:
+        print(f"Detected Chrome version: {version_main}")
+        driver = uc.Chrome(options=options, version_main=version_main)
+    else:
+        driver = uc.Chrome(options=options)
     
-    # 5. EXTRA SAFETY: Verify window size was applied (Headless sometimes ignores it)
+    # 5. EXTRA SAFETY
     driver.set_window_size(1366, 768)
 
     return driver
