@@ -12,3 +12,4 @@ beautifulsoup4
 playwright
 playwright-stealth
 boto3
+google-generativeai

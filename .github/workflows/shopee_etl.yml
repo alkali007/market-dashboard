@@ -1,8 +1,8 @@
-name: TikTok Shop ETL Sync
+name: Shopee ETL Sync
 
 on:
   schedule:
-    - cron: '0/30 * * * *' # Runs every hour
+    - cron: '0 2 * * *' # Runs at 02:00 UTC (09:00 AM UTC+7) every day
   workflow_dispatch: # Allows manual trigger
 
 jobs:
@@ -32,12 +32,12 @@ jobs:
       - name: Cache Scraper Cookies
         uses: actions/cache@v3
         with:
-          path: data/cookies.json
-          key: scraper-cookies-${{ runner.os }}-${{ github.run_id }}
+          path: etl/cookies_shopee.json
+          key: shopee-cookies-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
-            scraper-cookies-${{ runner.os }}-
+            shopee-cookies-${{ runner.os }}-
 
-      - name: Run ETL Project
+      - name: Run Shopee ETL
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           PROXY_URL: ${{ secrets.PROXY_URL }}
@@ -46,12 +46,12 @@ jobs:
           R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
           R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
         run: |
-          xvfb-run --server-args="-screen 0 1366x768x24" python etl/run_etl.py tiktok
+          xvfb-run --server-args="-screen 0 1366x768x24" python etl/run_etl.py shopee
 
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
-        if: always() # Always upload screenshots
+        if: always()
         with:
-          name: scraper-screenshots
+          name: shopee-screenshots
           path: data/screenshots/
-          retention-days: 1 # GitHub minimum is 1 day
+          retention-days: 1

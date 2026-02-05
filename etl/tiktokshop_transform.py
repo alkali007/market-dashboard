@@ -58,7 +58,8 @@ def transform_item(item):
         "sold_quantity": sold_val,
         "price_current": price_curr,
         "price_original": price_orig,
-        "discount": disc
+        "discount": disc,
+        "source": "tiktok"
     }
 
 def run_transform():

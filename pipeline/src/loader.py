@@ -103,11 +103,12 @@ def load_data(df_raw, df_enriched):
                 discount_val,
                 row['rating'],
                 row.get('url', ''),
-                row.get('image', '')
+                row.get('image', ''),
+                row.get('source', 'tiktok') # Default to tiktok if column missing
             ))
             
         insert_raw_query = """
-            INSERT INTO raw_products (content_hash, title_raw, quantity_sold, price_current, price_original, discount, rating, url, image_url)
+            INSERT INTO raw_products (content_hash, title_raw, quantity_sold, price_current, price_original, discount, rating, url, image_url, source)
             VALUES %s
             ON CONFLICT (content_hash) DO UPDATE SET
                 quantity_sold = EXCLUDED.quantity_sold,
@@ -116,6 +117,7 @@ def load_data(df_raw, df_enriched):
                 discount = EXCLUDED.discount,
                 rating = EXCLUDED.rating,
                 image_url = EXCLUDED.image_url,
+                source = EXCLUDED.source,
                 updated_at = NOW()
             RETURNING id, content_hash;
         """

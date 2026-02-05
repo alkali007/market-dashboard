@@ -26,6 +26,7 @@ export default function Home() {
   const [filters, setFilters] = useState({
     brand: [] as string[],
     product_type: [] as string[],
+    source: [] as string[],
     min_price: 0,
     max_price: 200000,
     min_rating: 0,
@@ -74,6 +75,7 @@ export default function Home() {
       const queryParams = new URLSearchParams();
       filters.brand.forEach(b => queryParams.append('brand', b));
       filters.product_type.forEach(t => queryParams.append('product_type', t));
+      filters.source.forEach(s => queryParams.append('source', s));
       if (filters.min_price > 0) queryParams.append('min_price', filters.min_price.toString());
       if (filters.max_price < 200000) queryParams.append('max_price', filters.max_price.toString());
       if (filters.min_rating > 0) queryParams.append('min_rating', filters.min_rating.toString());
@@ -123,6 +125,7 @@ export default function Home() {
     setFilters({
       brand: [],
       product_type: [],
+      source: [],
       min_price: 0,
       max_price: 200000,
       min_rating: 0,
@@ -133,6 +136,10 @@ export default function Home() {
   };
 
   if (!isMounted) return null;
+
+  const currentSources = filters.source.length > 0
+    ? filters.source.map(s => s === 'tiktok' ? 'TikTok Shop' : 'Shopee').join(' & ')
+    : 'All Platforms';
 
   return (
     <div className="flex bg-[#0B1120] min-h-screen text-[#E2E8F0] relative overflow-hidden">
@@ -153,6 +160,7 @@ export default function Home() {
         types={data.types || []}
         selectedBrands={filters.brand}
         selectedTypes={filters.product_type}
+        selectedSources={filters.source}
         priceRange={[filters.min_price, filters.max_price]}
         ratingRange={[filters.min_rating, filters.max_rating]}
         discountRange={[filters.min_discount, filters.max_discount]}
@@ -161,6 +169,9 @@ export default function Home() {
         }))}
         onTypeChange={(t: string) => setFilters((f: any) => ({
           ...f, product_type: f.product_type.includes(t) ? f.product_type.filter((x: string) => x !== t) : [...f.product_type, t]
+        }))}
+        onSourceChange={(s: string) => setFilters((f: any) => ({
+          ...f, source: f.source.includes(s) ? f.source.filter((x: string) => x !== s) : [...f.source, s]
         }))}
         onPriceChange={(min: number, max: number) => setFilters((f: any) => ({ ...f, min_price: min, max_price: max }))}
         onRatingChange={(min: number, max: number) => setFilters((f: any) => ({ ...f, min_rating: min, max_rating: max }))}
@@ -176,7 +187,7 @@ export default function Home() {
               Personal Care Analytical Console
             </h1>
             <p className="text-[#94A3B8] text-xs mt-1 uppercase tracking-widest font-bold">
-              Market Intelligence for Personal Care (Data Source: Tiktokshop)
+              Market Intelligence for Personal Care (Data Source: {currentSources})
             </p>
           </div>
           <button

@@ -8,11 +8,13 @@ interface FilterProps {
     types: { name: string; count: number }[];
     selectedBrands: string[];
     selectedTypes: string[];
+    selectedSources: string[];
     priceRange: [number, number];
     ratingRange: [number, number];
     discountRange: [number, number];
     onBrandChange: (brand: string) => void;
     onTypeChange: (type: string) => void;
+    onSourceChange: (source: string) => void;
     onPriceChange: (min: number, max: number) => void;
     onRatingChange: (min: number, max: number) => void;
     onDiscountChange: (min: number, max: number) => void;
@@ -24,17 +26,20 @@ export default function Filters({
     types,
     selectedBrands,
     selectedTypes,
+    selectedSources,
     priceRange,
     ratingRange,
     discountRange,
     onBrandChange,
     onTypeChange,
+    onSourceChange,
     onPriceChange,
     onRatingChange,
     onDiscountChange,
     onClearFilters
 }: FilterProps) {
     const [collapsed, setCollapsed] = useState<Record<string, boolean>>({
+        sources: false,
         brands: false,
         types: false,
         ranges: false
@@ -69,6 +74,32 @@ export default function Filters({
             </div>
 
             <div className="p-4 space-y-2">
+                <FilterGroup
+                    title="Market Platforms"
+                    count={selectedSources.length}
+                    isCollapsed={collapsed.sources}
+                    onToggle={() => toggleCollapse('sources')}
+                >
+                    <div className="space-y-1.5 mt-2">
+                        {[
+                            { id: 'tiktok', name: 'TikTok Shop' },
+                            { id: 'shopee', name: 'Shopee' }
+                        ].map((src) => (
+                            <label key={src.id} className="flex items-center group cursor-pointer py-0.5">
+                                <input
+                                    type="checkbox"
+                                    checked={selectedSources.includes(src.id)}
+                                    onChange={() => onSourceChange(src.id)}
+                                    className="appearance-none w-3.5 h-3.5 border border-[#1E293B] rounded bg-[#0B1120] checked:bg-[#10B981] checked:border-transparent transition-all mr-2 flex-shrink-0 cursor-pointer"
+                                />
+                                <span className={`text-xs text-[#94A3B8] group-hover:text-[#E2E8F0] transition-colors truncate flex-1 font-body`}>
+                                    {src.name}
+                                </span>
+                            </label>
+                        ))}
+                    </div>
+                </FilterGroup>
+
                 <FilterGroup
                     title="Market Brands"
                     count={selectedBrands.length}

@@ -12,8 +12,14 @@ def main():
     load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
     
     # 1. Ingest
-    # Assuming the data is in the directory above 'market_dashboard'
-    data_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'beauty_data_cleaned.csv')
+    if len(sys.argv) > 1:
+        data_path = sys.argv[1]
+        print(f"Using provided data path: {data_path}")
+    else:
+        # Default path
+        data_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'beauty_data_cleaned.csv')
+        print(f"Using default data path: {data_path}")
+        
     df = ingestion.ingest_data(data_path)
     
     if df is None:

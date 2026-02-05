@@ -69,6 +69,13 @@ func buildWhereClause(r *http.Request) (string, []interface{}) {
 		idx++
 	}
 
+	sources := r.URL.Query()["source"]
+	if len(sources) > 0 {
+		query += " AND source = ANY($" + strconv.Itoa(idx) + ")"
+		args = append(args, sources)
+		idx++
+	}
+
 	// Range Filters
 	ranges := []struct {
 		param string
