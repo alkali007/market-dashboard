@@ -32,6 +32,14 @@ jobs:
         playwright install chromium
         playwright install-deps
 
+    - name: Cache Scraper Cookies
+      uses: actions/cache@v3
+      with:
+        path: data/cookies_tokopedia.json
+        key: tokopedia-cookies-${{ runner.os }}-${{ github.run_id }}
+        restore-keys: |
+          tokopedia-cookies-${{ runner.os }}-
+
     - name: Run Tokopedia ETL
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
