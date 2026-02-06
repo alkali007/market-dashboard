@@ -1,11 +1,6 @@
-2026/02/06-17:29:19.433 814 Reusing MANIFEST C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\Local Storage\leveldb/MANIFEST-000001
-2026/02/06-17:29:19.461 814 Recovering log #3
-2026/02/06-17:29:19.500 814 Reusing old log C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\Local Storage\leveldb/000003.log 
-2026/02/06-17:30:43.914 5e28 Level-0 table #5: started
-2026/02/06-17:30:43.938 5e28 Level-0 table #5: 231342 bytes OK
-2026/02/06-17:30:43.943 5e28 Delete type=0 #3
-2026/02/06-17:31:04.455 5e28 Level-0 table #7: started
-2026/02/06-17:31:04.473 5e28 Level-0 table #7: 96828 bytes OK
-2026/02/06-17:31:04.478 5e28 Delete type=0 #4
-2026/02/06-17:34:10.535 5350 Level-0 table #9: started
-2026/02/06-17:34:10.559 5350 Level-0 table #9: 144186 bytes OK
+2026/02/06-18:17:59.423 4b08 Reusing MANIFEST C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/02/06-18:17:59.444 4b08 Recovering log #15
+2026/02/06-18:17:59.460 4b08 Reusing old log C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\Local Storage\leveldb/000015.log 
+2026/02/06-18:19:24.977 5eb8 Level-0 table #20: started
+2026/02/06-18:19:24.993 5eb8 Level-0 table #20: 117024 bytes OK
+2026/02/06-18:19:24.999 5eb8 Delete type=0 #15

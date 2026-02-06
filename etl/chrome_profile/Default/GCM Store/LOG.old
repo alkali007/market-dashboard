@@ -1,2 +1,3 @@
-2026/02/06-17:29:47.897 4e38 Creating DB C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\GCM Store since it was missing.
-2026/02/06-17:29:48.273 4e38 Reusing MANIFEST C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\GCM Store/MANIFEST-000001
+2026/02/06-18:18:11.098 3cb0 Reusing MANIFEST C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\GCM Store/MANIFEST-000001
+2026/02/06-18:18:11.101 3cb0 Recovering log #3
+2026/02/06-18:18:11.104 3cb0 Reusing old log C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\GCM Store/000003.log 

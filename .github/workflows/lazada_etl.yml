@@ -29,14 +29,13 @@ jobs:
           pip install -r requirements.txt
           python -m playwright install chromium --with-deps
 
-      # Cache Chrome Profile (Persistent Login Session)
-      - name: Cache Chrome Profile
+      - name: Cache Lazada Cookies
         uses: actions/cache@v3
         with:
-          path: etl/chrome_profile
-          key: lazada-profile-${{ runner.os }}-${{ github.run_id }}
+          path: data/cookies_lazada.json
+          key: lazada-cookies-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
-            lazada-profile-${{ runner.os }}-
+            lazada-cookies-${{ runner.os }}-
 
       - name: Run Lazada ETL
         env:

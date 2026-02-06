@@ -11,7 +11,7 @@ from playwright_stealth import Stealth
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ETL_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
-COOKIES_PATH = os.path.join(ETL_DIR, "cookies_lazada.json")
+COOKIES_PATH = os.path.join(DATA_DIR, "cookies_lazada.json")
 RAW_OUTPUT_PATH = os.path.join(DATA_DIR, "raw", "lazada_raw.json")
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
@@ -132,18 +132,26 @@ async def run_scraper():
     num_pages = 10 
     
     async with async_playwright() as p:
-        print(f"Launching scraper with persistent profile: {PROFILE_PATH}")
-        
-        # Launch persistent context (No browser.close() - context close handles it)
-        context = await p.chromium.launch_persistent_context(
-            user_data_dir=PROFILE_PATH,
-            headless=True, # Must be False to use the profile effectively usually, or True if profile is very strong
-            channel="chrome",
-            args=["--disable-blink-features=AutomationControlled"],
+        # Launch using standard context for cross-platform compatibility (Windows -> Linux CI)
+        browser = await p.chromium.launch(
+            headless=True, # Use Headless=True for CI stability unless debugging
+            args=["--disable-blink-features=AutomationControlled"]
+        )
+        context = await browser.new_context(
+            user_agent=USER_AGENT, 
             viewport={"width": 1366, "height": 768}
         )
         
-        # Note: Persistence handles cookies automatically, no need to manual load/save unless backup needed.
+        if os.path.exists(COOKIES_PATH):
+            try:
+                with open(COOKIES_PATH, "r") as f:
+                    cookies = json.load(f)
+                    await context.add_cookies(cookies)
+                print(f"[SUCCESS] Loaded {len(cookies)} cookies from {COOKIES_PATH}")
+            except Exception as e:
+                print(f"[WARNING] Failed to load cookies: {e}")
+
+
         
         # 2. CONCURRENT SCRAPING
         print(f"Starting controlled scrape (Concurrency: {CONCURRENCY_LIMIT})...")
@@ -162,7 +170,7 @@ async def run_scraper():
         print(f"\n[SUCCESS] Captured total {len(all_items)} products.")
         print(f"File: {RAW_OUTPUT_PATH}")
         
-        await context.close()
+        await browser.close()
 
 if __name__ == "__main__":
     asyncio.run(run_scraper())
