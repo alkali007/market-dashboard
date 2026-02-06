@@ -10,6 +10,9 @@ from shopee_load import run_shopee_load
 from tokopedia_scraper import run_scraper as run_tokopedia_extract
 from tokopedia_transform import run_tokopedia_transform
 from tokopedia_load import run_tokopedia_load
+from lazada_scraper import run_scraper as run_lazada_extract
+from lazada_transform import run_lazada_transform
+from lazada_load import run_lazada_load
 from r2_utils import upload_raw_to_r2
 
 import sys
@@ -39,7 +42,7 @@ def main():
         if os.path.exists(raw_dir):
             print(f"Cleaning old TikTok raw data in {raw_dir}...")
             for f in os.listdir(raw_dir):
-                if f.endswith(".json") and "tokopedia" not in f: # Protect Tokopedia file
+                if f.endswith(".json") and "tokopedia" not in f and "lazada" not in f: # Protect other platforms
                     os.remove(os.path.join(raw_dir, f))
         try:
             asyncio.run(run_tiktok_extract())
@@ -48,7 +51,7 @@ def main():
             if os.path.exists(raw_dir):
                 print(f"[TIKTOK SHOP] R2: Syncing raw data to Cloud Storage...")
                 for f in os.listdir(raw_dir):
-                    if f.endswith(".json") and "tokopedia" not in f:
+                    if f.endswith(".json") and "tokopedia" not in f and "lazada" not in f:
                         upload_raw_to_r2("tiktok", os.path.join(raw_dir, f))
             
             run_tiktok_transform()
@@ -97,6 +100,24 @@ def main():
             run_tokopedia_load()
         except Exception as e:
             print(f"Tokopedia Workflow failed: {e}")
+
+    # --- LAZADA WORKFLOW ---
+    if target in ['lazada', 'all']:
+        print("\n[LAZADA] Starting Workflow...")
+        raw_path = os.path.join(raw_dir, "lazada_raw.json")
+        try:
+            # Note: lazada_scraper already runs his own capture and scrape
+            asyncio.run(run_lazada_extract())
+            
+            # Upload to R2
+            if os.path.exists(raw_path):
+                print(f"[LAZADA] R2: Syncing raw data to Cloud Storage...")
+                upload_raw_to_r2("lazada", raw_path)
+            
+            run_lazada_transform()
+            run_lazada_load()
+        except Exception as e:
+            print(f"Lazada Workflow failed: {e}")
 
     total_time = time.time() - start_time
     print("\n==========================================")

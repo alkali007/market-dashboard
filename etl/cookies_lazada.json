@@ -1,0 +1,250 @@
+[
+    {
+        "name": "client_type",
+        "value": "desktop",
+        "domain": "my.lazada.co.id",
+        "path": "/api/recentOrders",
+        "expires": -1,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "client_type",
+        "value": "desktop",
+        "domain": "cart.lazada.co.id",
+        "path": "/cart/api",
+        "expires": -1,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "t_fv",
+        "value": "1770370075415",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1804930075.422411,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "t_uid",
+        "value": "Zwqp3SWbwCHGVqODdOS0XjL4XSkvp3WC",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1804930075.43782,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "t_sid",
+        "value": "vsiiyz1jLHoKOffy4KXT3NCISGTMgjVq",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1770371875,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "utm_channel",
+        "value": "NA",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1770371875,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "lzd_cid",
+        "value": "07def666-8760-4721-863e-288f629d241a",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1801906076.080034,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "lzd_sid",
+        "value": "15fc54241b5268f3d506ecbe6db92478",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": true,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "_tb_token_",
+        "value": "f503b3818ee33",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": true,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "cna",
+        "value": "HKIMIjh11QYCAbYKgpsH5v/m",
+        "domain": ".mmstat.com",
+        "path": "/",
+        "expires": 1804930077.013715,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None",
+        "partitionKey": "https://lazada.co.id",
+        "_crHasCrossSiteAncestor": true
+    },
+    {
+        "name": "hng",
+        "value": "ID|id|IDR|360",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1772962076,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "userLanguageML",
+        "value": "id",
+        "domain": "www.lazada.co.id",
+        "path": "/",
+        "expires": 1772962076,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "lwrid",
+        "value": "AgGcMkeOvB3qRO3bG1fBX39uI7%2Bv",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1785922076.349195,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "cna",
+        "value": "HKIMIjh11QYCAbYKgpsH5v/m",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1804930076.447876,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "sca",
+        "value": "1aefebd7",
+        "domain": ".mmstat.com",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None",
+        "partitionKey": "https://lazada.co.id",
+        "_crHasCrossSiteAncestor": true
+    },
+    {
+        "name": "atpsida",
+        "value": "6af5e73696a9cddcde687d47_1770370076_1",
+        "domain": ".mmstat.com",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None",
+        "partitionKey": "https://lazada.co.id",
+        "_crHasCrossSiteAncestor": true
+    },
+    {
+        "name": "_m_h5_tk",
+        "value": "5bb9f7e0080b353fb4d02becf2931c6b_1770377637741",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1770974877.951294,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "_m_h5_tk_enc",
+        "value": "38d41968321c04a4550d98054d4e6312",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1770974877.951511,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "xlly_s",
+        "value": "1",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1770629278,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "lwrtk",
+        "value": "AAIEaYYknkiFxOEy0jMaAclT/cnMUCyyCh3HHQo84j3AF8Ti3O08jq8=",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1785922079.12248,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "cbc",
+        "value": "T2gAt4OYjTWu0l2GRgLBvpsJxdbYtgIPKroKBep8y6k-PNm7axuLgdPe9_QNAbTJrwo=",
+        "domain": ".ynuf.aliapp.org",
+        "path": "/",
+        "expires": 1801906080.248308,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None",
+        "partitionKey": "https://lazada.co.id",
+        "_crHasCrossSiteAncestor": true
+    },
+    {
+        "name": "cbc",
+        "value": "T2gA2QVQBTMXawxln03oIsmsgWe75LelQ7-V6Vm-yziR5cVo4nWqNq4oN8NcpcQVAUQ=",
+        "domain": ".alibaba.com",
+        "path": "/",
+        "expires": 1801906081.304249,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "epssw",
+        "value": "11*mmLjCmlDPr1egmAzEN3k_o11l1rdCHZLRkGRqP12zkfZ5_5LQkzIk3_cnX9BV0ZvnXbLkmhv5ProgpAZEOlVORAxaOAmmmm4LOAvH7RhdjZJSNRsanKcdXg2g5wBgnxCzSdnotvOarbi6CVMU2Iqt1jmNtV3dKQw58nqfsLF7lszA5bmF2z1jammmmompqB1CCDG1_uuuOlmmoWbu4P71lwmmqulWBmmqqul7DujEjETEmBayPEBEmHJuRmmBjjemmBmuu3emJn02fgEBBBefDPnEvfM-6QKKQ74EHeiovga",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1785922081.891434,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "tfstk",
+        "value": "gJYsBKsimR21JdctHRlUFiehuAQwGXuzcS1vZIUaMNQTH-dRLZlg0cffl99cQiKZnp6CSe-auOkGlIpPlYkrz4RMOabxUY-NbgCRks3VHDStviymDYkrz2ROhg4qUClNewsdi9CTWPBtOkCfiZCTXOhCps1uDRpAkXGCZsBYkZUTpWCViZBvHZhB99ffk1pAkXOdKsHdaD1Kf9RsGSl7vmzFlCBQkrLKbG6W6ozYke11fiROdCRwR111FiM9wdT9LILwSMD7eZAeVKtvQv4AQ3OdW9-tpzXpqOQwSZVYXM8eME7pTAU1CHpMHMtiCPWOcF-fb3D7qtSAGgQAASUvOCW6H6_8Czse8ILVJBkT5OtpIEQwybrctiKeSgYZpP_JqC7wDdk3kO-W9wsPLzW5NIE4mOUfOTlIOoq4wiUeH9KOq4SOt6VrOXZzmGChOTlIOoqcX6f3aXGQ4of..",
+        "domain": ".lazada.co.id",
+        "path": "/",
+        "expires": 1785922077,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    }
+]

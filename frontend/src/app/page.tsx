@@ -140,7 +140,8 @@ export default function Home() {
   const sourceNames: Record<string, string> = {
     'tiktok': 'TikTok Shop',
     'shopee': 'Shopee',
-    'tokopedia': 'Tokopedia'
+    'tokopedia': 'Tokopedia',
+    'lazada': 'Lazada'
   };
 
   const currentSources = filters.source.length > 0
