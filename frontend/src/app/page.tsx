@@ -137,8 +137,14 @@ export default function Home() {
 
   if (!isMounted) return null;
 
+  const sourceNames: Record<string, string> = {
+    'tiktok': 'TikTok Shop',
+    'shopee': 'Shopee',
+    'tokopedia': 'Tokopedia'
+  };
+
   const currentSources = filters.source.length > 0
-    ? filters.source.map(s => s === 'tiktok' ? 'TikTok Shop' : 'Shopee').join(' & ')
+    ? filters.source.map(s => sourceNames[s] || s).join(' & ')
     : 'All Platforms';
 
   return (

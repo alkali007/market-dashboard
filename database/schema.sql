@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS raw_products (
     rating          NUMERIC(3,1)  DEFAULT 0,
     url             TEXT,
     image_url       TEXT,
+    source          TEXT        DEFAULT 'tiktok',
     ingested_at     TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -49,6 +50,7 @@ CREATE OR REPLACE VIEW analytics_master AS
     r.discount,
     r.price_original,
     r.price_current,
+    r.source,
     (r.quantity_sold::numeric * e.price_effective) AS revenue_proxy,
         CASE
             WHEN r.discount <= 0.1 THEN 'Low'::text

@@ -7,6 +7,9 @@ from tiktokshop_load import run_load as run_tiktok_load
 from shopee_scraper import main as run_shopee_extract
 from shopee_transform import run_shopee_transform
 from shopee_load import run_shopee_load
+from tokopedia_scraper import run_scraper as run_tokopedia_extract
+from tokopedia_transform import run_tokopedia_transform
+from tokopedia_load import run_tokopedia_load
 from r2_utils import upload_raw_to_r2
 
 import sys
@@ -27,6 +30,7 @@ def main():
     project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
     raw_dir = os.path.join(project_root, "data", "raw")
     shopee_raw_dir = os.path.join(project_root, "shopee_data")
+    tokopedia_raw_path = os.path.join(raw_dir, "tokopedia_raw.json")
     
     # --- TIKTOK SHOP WORKFLOW ---
     if target in ['tiktok', 'all']:
@@ -35,7 +39,7 @@ def main():
         if os.path.exists(raw_dir):
             print(f"Cleaning old TikTok raw data in {raw_dir}...")
             for f in os.listdir(raw_dir):
-                if f.endswith(".json"):
+                if f.endswith(".json") and "tokopedia" not in f: # Protect Tokopedia file
                     os.remove(os.path.join(raw_dir, f))
         try:
             asyncio.run(run_tiktok_extract())
@@ -44,7 +48,7 @@ def main():
             if os.path.exists(raw_dir):
                 print(f"[TIKTOK SHOP] R2: Syncing raw data to Cloud Storage...")
                 for f in os.listdir(raw_dir):
-                    if f.endswith(".json"):
+                    if f.endswith(".json") and "tokopedia" not in f:
                         upload_raw_to_r2("tiktok", os.path.join(raw_dir, f))
             
             run_tiktok_transform()
@@ -75,6 +79,24 @@ def main():
             run_shopee_load()
         except Exception as e:
             print(f"Shopee Workflow failed: {e}")
+
+    # --- TOKOPEDIA WORKFLOW ---
+    if target in ['tokopedia', 'all']:
+        print("\n[TOKOPEDIA] Starting Workflow...")
+        # Note: We do NOT delete tokopedia_raw.json as requested, to allow appending.
+        
+        try:
+            asyncio.run(run_tokopedia_extract())
+            
+            # Upload to R2
+            if os.path.exists(tokopedia_raw_path):
+                print(f"[TOKOPEDIA] R2: Syncing raw data to Cloud Storage...")
+                upload_raw_to_r2("tokopedia", tokopedia_raw_path)
+            
+            run_tokopedia_transform()
+            run_tokopedia_load()
+        except Exception as e:
+            print(f"Tokopedia Workflow failed: {e}")
 
     total_time = time.time() - start_time
     print("\n==========================================")

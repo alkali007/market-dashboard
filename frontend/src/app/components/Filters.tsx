@@ -83,7 +83,8 @@ export default function Filters({
                     <div className="space-y-1.5 mt-2">
                         {[
                             { id: 'tiktok', name: 'TikTok Shop' },
-                            { id: 'shopee', name: 'Shopee' }
+                            { id: 'shopee', name: 'Shopee' },
+                            { id: 'tokopedia', name: 'Tokopedia' }
                         ].map((src) => (
                             <label key={src.id} className="flex items-center group cursor-pointer py-0.5">
                                 <input
