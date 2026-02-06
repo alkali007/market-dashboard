@@ -36,7 +36,7 @@ graph TD
 ---
 
 ## ⚙️ The ETL Engine (Data Engineering)
-*   **Intelligent Extraction**: Using **Playwright (Python)** with Stealth configurations, the scraper mimics human patterns to navigate Tokopedia’s Personal Care section.
+*   **Multi-Source Intelligent Extraction**: Using **Playwright (Python)** with Stealth configurations to extract data from **TikTok Shop, Shopee, Tokopedia, Lazada, and Blibli**.
 *   **Decoupled Backup**: Every scrape is mirrored to **Cloudflare R2**, ensuring a permanent "source of truth" beyond the database.
 *   **Normalization & Deduplication**: URLs are cleaned of tracking tokens before hashing (SHA-256), ensuring price updates are tracked without duplicate records.
 *   **Fail-Fast Resilience**: Strict error propagation ensures that if a proxy fails, the system halts immediately to prevent data corruption.

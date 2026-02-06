@@ -141,7 +141,8 @@ export default function Home() {
     'tiktok': 'TikTok Shop',
     'shopee': 'Shopee',
     'tokopedia': 'Tokopedia',
-    'lazada': 'Lazada'
+    'lazada': 'Lazada',
+    'blibli': 'Blibli'
   };
 
   const currentSources = filters.source.length > 0

@@ -13,6 +13,9 @@ from tokopedia_load import run_tokopedia_load
 from lazada_scraper import run_scraper as run_lazada_extract
 from lazada_transform import run_lazada_transform
 from lazada_load import run_lazada_load
+from blibli_scraper import run_scraper as run_blibli_extract
+from blibli_transform import transform_data as run_blibli_transform
+from blibli_load import run_blibli_load
 from r2_utils import upload_raw_to_r2
 
 import sys
@@ -118,6 +121,23 @@ def main():
             run_lazada_load()
         except Exception as e:
             print(f"Lazada Workflow failed: {e}")
+
+    # --- BLIBLI WORKFLOW ---
+    if target in ['blibli', 'all']:
+        print("\n[BLIBLI] Starting Workflow...")
+        blibli_raw_path = os.path.join(raw_dir, "blibli_raw.json")
+        try:
+            asyncio.run(run_blibli_extract())
+            
+            # Upload to R2
+            if os.path.exists(blibli_raw_path):
+                print(f"[BLIBLI] R2: Syncing raw data to Cloud Storage...")
+                upload_raw_to_r2("blibli", blibli_raw_path)
+            
+            run_blibli_transform()
+            run_blibli_load()
+        except Exception as e:
+            print(f"Blibli Workflow failed: {e}")
 
     total_time = time.time() - start_time
     print("\n==========================================")

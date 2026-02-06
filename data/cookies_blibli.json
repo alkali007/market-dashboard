@@ -1,0 +1,580 @@
+[
+    {
+        "name": "_cfuvid",
+        "value": "dYSoyecVw1MOXhUUHqiXAfR5VuUJMdcMUwl3A4xtX6Q-1770378876359-0.0.1.1-604800000",
+        "domain": ".www.blibli.com",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "_cfuvid",
+        "value": "8XMLOJq1ilc9CtGjRz1p2v0npx98talItyON57nk8e4-1770378877021-0.0.1.1-604800000",
+        "domain": ".static-src.com",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "Blibli-Additional-Parameter-Signature",
+        "value": "",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1770983681.656004,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "Blibli-Is-Member",
+        "value": "false",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1770983681.656255,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "Blibli-Is-Remember",
+        "value": "false",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1770983681.656429,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "Blibli-Session-Id",
+        "value": "00234491-3257-49a3-bed0-0a9e1c07bdf9",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1770983681.656562,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "Blibli-Signature",
+        "value": "2ad5dc7f2119b0c2f186e220533da270b6c2d470",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1770983681.656691,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "Blibli-User-Id",
+        "value": "00234491-3257-49a3-bed0-0a9e1c07bdf9",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1770983681.656809,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "Blibli-Unm-Signature",
+        "value": "db25132fcfcb0c8e559eeb36b918d72ef1321a54",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1770983681.656923,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "Blibli-Unm-Id",
+        "value": "00234491-3257-49a3-bed0-0a9e1c07bdf9",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1770983681.657036,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "_gcl_au",
+        "value": "1.1.1903347232.1770378885",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1778154885,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "_cs_mk_ga",
+        "value": "0.8725929400290345_1770378885270",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1770380685,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "_gid",
+        "value": "GA1.2.574071692.1770378886",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1770466873,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "_ttp",
+        "value": "39ILxgtiPrQlMkFNdx5gzFjW4lR",
+        "domain": ".tiktok.com",
+        "path": "/",
+        "expires": 1804076402.408763,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "__bwa_user_id",
+        "value": "1770378886.f9a4a80b-73bd-40f8-ab44-f6ceb0701627",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1804940479.2655,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "__bwa_session_id",
+        "value": "1770378886.edc465e8-4c06-4a05-97d3-34edb0b09836",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1770382279,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "ar_debug",
+        "value": "1",
+        "domain": ".www.google-analytics.com",
+        "path": "/",
+        "expires": 1778156476.023249,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "_fbp",
+        "value": "fb.1.1770378887636.271615320433087118",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1778156473,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "IDE",
+        "value": "AHWqTUlkRwy5XHR21r7HY8pW82Cu8pRdZcDhmK3Cw5cUKpjdr3_e7zciSChFrG8z",
+        "domain": ".doubleclick.net",
+        "path": "/",
+        "expires": 1804938890.1806,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "Blibli-Device-Id",
+        "value": "U.cf4e4771-fd4e-47f7-8c17-7f78653ffd38",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1804940400.641032,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "Blibli-Device-Id-Signature",
+        "value": "84571dcfe6d7cbe3f4d7f1419281f55acc2d5a8d",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1804940400.641491,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "AEC",
+        "value": "AaJma5vTZ5RA0T7DH0xAfpqVnIUPomUSOaHvau6cQTEvJ8jpki3V4QAhUA",
+        "domain": ".google.com",
+        "path": "/",
+        "expires": 1785931273.187292,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "__Secure-BUCKET",
+        "value": "CKIF",
+        "domain": ".google.com",
+        "path": "/",
+        "expires": 1785931273.187769,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "guest_id_marketing",
+        "value": "v1%3A177037927330134050",
+        "domain": ".twitter.com",
+        "path": "/",
+        "expires": 1804939273.498341,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "guest_id_ads",
+        "value": "v1%3A177037927330134050",
+        "domain": ".twitter.com",
+        "path": "/",
+        "expires": 1804939273.498496,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "personalization_id",
+        "value": "\"v1_jXMkjyAkVPHrdsNCLBUYZA==\"",
+        "domain": ".twitter.com",
+        "path": "/",
+        "expires": 1804939273.49857,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "guest_id",
+        "value": "v1%3A177037927330134050",
+        "domain": ".twitter.com",
+        "path": "/",
+        "expires": 1804939273.498633,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "muc_ads",
+        "value": "37f294ff-484a-400b-8296-d547a2bc9f16",
+        "domain": ".t.co",
+        "path": "/",
+        "expires": 1804939273.538294,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "NID",
+        "value": "528=XQxTnYdq1yDUCEtcUdu5WAs1MvTmD4_pdRMRKqUabLXoQN7DT0vslc_lSXLoolDR3O2SdEb7-M9U5Kdks5Wes3wfpKZTmP6DPG6n9g9krKMzXKDM4Es09bV041KwQmhw6GrZrk-cl2nRCgEUdcdXjJDMT4wOEIOBBpJPNqXu25FppECC6NIuiu0QAUr9PGUXajR7TC-gw-P2BeDTWNbUoeLFfMIiJSEcgsCMYKzLX8NeFkwneXIWvbp6XaEMKo92VFsouHdCOQ",
+        "domain": ".google.com",
+        "path": "/",
+        "expires": 1786190472.459259,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "af_id",
+        "value": "6e03e76c-f1f3-4505-ba37-254ce600bfe7-p",
+        "domain": ".appsflyer.com",
+        "path": "/",
+        "expires": 1804508473.800512,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "afUserId",
+        "value": "6e03e76c-f1f3-4505-ba37-254ce600bfe7-p",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1804940473.810559,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "_tt_enable_cookie",
+        "value": "1",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1804076404,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "_ttp",
+        "value": "01KGSDCXHS628CWFM8ZGDN21TG_.tt.1",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1804076404,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "af_id",
+        "value": "ec2120f1-9a4e-4fc4-aaca-388e9a9c6531-p",
+        "domain": ".onelink.me",
+        "path": "/",
+        "expires": 1804507441.960846,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "AF_SYNC",
+        "value": "1770379442560",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1770984242,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "__cf_bm",
+        "value": "ZAPvajHIrg8iHKYKK9rjdxW1MHKlndr36hzVs8Fowds-1770380397-1.0.1.1-A9kKaYBCOpCdO30ZtIptvHh2X8reYlvyXU04I.xxSuWAAA6IcPe6VOIZlUjxZujewzUzB9OHOyoB.d0nRA52cvr5FtfMoXR60eVkA0ZiaKo",
+        "domain": ".www.blibli.com",
+        "path": "/",
+        "expires": 1770382197.862775,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "cf_clearance",
+        "value": "0q7nQpR9VhxN7ax2.ZZ244hG89C2lSeSFr59Go0RIzw-1770380399-1.2.1.1-FeUTjAmAfV8e1ldwBK85CNs5QzDC_l2WqVc7B32qkio4Km8HMcbyc5K8yPPX.KyKaaTvf94tg.OV2o1FzaTDolhb6eTxBgQrcq4uMM2p.TkLH3z8FiaCExwJJCtwy3zNR_E0YRFCEwczEYLtNVnsRUWy.pWz.nR_eMmhvsJwAoy8fDWoUQ2Ttfk5ltqMxOq.LASuGW7Uf1h42Xd.KTFOD8ewQMMnqqcD2y2g4_ZomGXfZaZuGL75GerJ7zVk9QZF",
+        "domain": ".www.blibli.com",
+        "path": "/",
+        "expires": 1801916399.86915,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "None",
+        "partitionKey": "https://blibli.com",
+        "_crHasCrossSiteAncestor": false
+    },
+    {
+        "name": "g_state",
+        "value": "{\"i_l\":0,\"i_ll\":1770380403313,\"i_b\":\"j/2xntl5Jp5imvelz+dlhkhC8fldpVzQSH+2d72wT6w\",\"i_e\":{\"enable_itp_optimization\":0}}",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1785932403,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "g",
+        "value": "pUzEKWQhHYFL8solKaG0_1770380405861",
+        "domain": ".creativecdn.com",
+        "path": "/",
+        "expires": 1801916406.113114,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "c",
+        "value": "pUzEKWQhHYFL8solKaG0_FAOiA95ZI30AXifJGDUt_1770380405861",
+        "domain": ".creativecdn.com",
+        "path": "/",
+        "expires": 1801916406.113268,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None",
+        "partitionKey": "https://blibli.com",
+        "_crHasCrossSiteAncestor": true
+    },
+    {
+        "name": "ts",
+        "value": "1770380405",
+        "domain": ".creativecdn.com",
+        "path": "/",
+        "expires": 1801916406.113474,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None",
+        "partitionKey": "https://blibli.com",
+        "_crHasCrossSiteAncestor": true
+    },
+    {
+        "name": "XANDR_PANID",
+        "value": "b4nE1ouZEt64sn0S3UkS_67uKZFvAZAjHaY7-NHD7djIeLYLUFKyPxbv-7HiopsiGIs4vcYlhWTCSuHHvbs96_bvP-u9roBe-Wq0bhu24zw.",
+        "domain": ".adnxs.com",
+        "path": "/",
+        "expires": 1778156407.376524,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None",
+        "partitionKey": "https://blibli.com",
+        "_crHasCrossSiteAncestor": true
+    },
+    {
+        "name": "uuid2",
+        "value": "8391334190975747323",
+        "domain": ".adnxs.com",
+        "path": "/",
+        "expires": 1778156407.376859,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "anj",
+        "value": "dTM7k!M4/rD>6NRF']wIg2In@o49/D!]tbPl@/@8+nOv3U_hU1L#A)ZIT1hNc:j(xN_$TlG<hb:FlN#`?UfEdCamu]Hh-eKD>HbJaaVv`j)K9n3If)y3KL9D3I?*wrn>-d",
+        "domain": ".adnxs.com",
+        "path": "/",
+        "expires": 1778156407.376764,
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "_ga",
+        "value": "GA1.2.1425986058.1770378886",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1804940473.355094,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "Blibli-dv-token",
+        "value": "JT_0lURWUvw3L1BLVOfGDLueUlX-DXs-1lLzUKAAMjz648",
+        "domain": "www.blibli.com",
+        "path": "/",
+        "expires": 1770466812,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "moe_uuid",
+        "value": "85191772-1012-4255-9569-e696d6f21110",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1804940415.109709,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    },
+    {
+        "name": "cebs",
+        "value": "1",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Strict"
+    },
+    {
+        "name": "_ce.clock_data",
+        "value": "330%2C182.10.130.155%2C1%2C8e253f85246590342756399a57054cb8%2CChrome%2CID",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1770466816,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Strict"
+    },
+    {
+        "name": "cebsp_",
+        "value": "1",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Strict"
+    },
+    {
+        "name": "_ce.s",
+        "value": "v~8b1ee06cf0353acee8858ab02e73a972da56d5eb~lcw~1770380416578~vir~new~lva~1770380414826~vpv~0~v11.cs~295312~v11.s~31f81a10-0356-11f1-bcb2-73039c372eb9~v11.vs~8b1ee06cf0353acee8858ab02e73a972da56d5eb~v11.fsvd~eyJ1cmwiOiJibGlibGkuY29tL2Nhcmkvc2tpbmNhcmUiLCJyZWYiOiIiLCJ1dG0iOltdfQ%3D%3D~v11.sla~1770380416571~v11.wss~1770380416578~v11ls~31f81a10-0356-11f1-bcb2-73039c372eb9~lcw~1770380416679",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1801916416,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Strict"
+    },
+    {
+        "name": "forterToken",
+        "value": "11d9e8763c564f8a8a8b55b0fed7ee42_1770380405359__UDF43-m4_25ck_",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1804940419,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "_dc_gtm_UA-21718848-13",
+        "value": "1",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1770380533,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "ttcsid_C38OU43TAIRUEDS4L1L0",
+        "value": "1770379441733::1WIz6NbFFNRLKZupjZHi.1.1770380473451.1",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1804076473,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "ttcsid",
+        "value": "1770379441735::PV2QYNUTn_WKh6ggxEJV.1.1770380473452.0",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1804076473,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "_ga_G3ZP2F3MW9",
+        "value": "GS2.1.s1770378886$o1$g1$t1770380487$j39$l0$h510726716",
+        "domain": ".blibli.com",
+        "path": "/",
+        "expires": 1804940487.179779,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+    },
+    {
+        "name": "Raphael",
+        "value": "Y2NrawMBX8jN50NBvgLcv58qivLmmlW2BVIslExgxFN4eITZTD-lo9XyO9pxPI45ytn7gFltQ08M66lZhJGoZH6KQdaZavIoHxZNcwZDb2xeHCK0",
+        "domain": "blibli.ck123.io",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": false,
+        "secure": true,
+        "sameSite": "None"
+    }
+]

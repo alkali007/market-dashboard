@@ -85,7 +85,8 @@ export default function Filters({
                             { id: 'tiktok', name: 'TikTok Shop' },
                             { id: 'shopee', name: 'Shopee' },
                             { id: 'tokopedia', name: 'Tokopedia' },
-                            { id: 'lazada', name: 'Lazada' }
+                            { id: 'lazada', name: 'Lazada' },
+                            { id: 'blibli', name: 'Blibli' }
                         ].map((src) => (
                             <label key={src.id} className="flex items-center group cursor-pointer py-0.5">
                                 <input
