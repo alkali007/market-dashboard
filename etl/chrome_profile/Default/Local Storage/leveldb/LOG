@@ -1,0 +1,9 @@
+2026/02/06-17:34:40.028 45e8 Reusing MANIFEST C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/02/06-17:34:40.047 45e8 Recovering log #6
+2026/02/06-17:34:40.052 45e8 Level-0 table #9: started
+2026/02/06-17:34:40.126 45e8 Level-0 table #9: 144186 bytes OK
+2026/02/06-17:34:40.128 45e8 Recovering log #8
+2026/02/06-17:34:40.134 45e8 Level-0 table #10: started
+2026/02/06-17:34:40.161 45e8 Level-0 table #10: 111494 bytes OK
+2026/02/06-17:34:40.174 45e8 Delete type=0 #6
+2026/02/06-17:34:40.174 45e8 Delete type=0 #8

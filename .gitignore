@@ -6,6 +6,7 @@
 !data/cookies_shopee.json
 !data/cookies_tokopedia.json
 !etl/cookies_lazada.json
+!etl/chrome_profile/
 !package.json
 !tsconfig.json
 !next.config.js
