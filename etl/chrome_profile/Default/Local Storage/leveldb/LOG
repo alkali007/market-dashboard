@@ -1,6 +1,0 @@
-2026/02/06-18:24:55.014 2098 Reusing MANIFEST C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\Local Storage\leveldb/MANIFEST-000001
-2026/02/06-18:24:55.086 2098 Recovering log #19
-2026/02/06-18:24:55.109 2098 Reusing old log C:\Users\Jan\Downloads\Dashboard_Market Research\market_dashboard\etl\chrome_profile\Default\Local Storage\leveldb/000019.log 
-2026/02/06-18:25:55.163 2098 Level-0 table #23: started
-2026/02/06-18:25:55.202 2098 Level-0 table #23: 114147 bytes OK
-2026/02/06-18:25:55.207 2098 Delete type=0 #19
